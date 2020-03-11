@@ -5,6 +5,7 @@ import java.util.ArrayList;
 
 public class csvHandler {
 
+
     public ArrayList<String> readCSV(String csvFile){
 
         BufferedReader br = null;

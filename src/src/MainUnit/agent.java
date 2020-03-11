@@ -5,20 +5,29 @@ public enum agent {
     A, B;
     agent currentTurn = null;
 
-    public agent currentTurn(){
+    public agent getCurrentTurn(){
         return currentTurn;
     }
 
     public void nextTurn(){
-        if(currentTurn() == agent.A){
+        base.instance.turn++;
+        if(currentTurn == agent.A){
             currentTurn = agent.B;
-        }else{
+        }else if(currentTurn == agent.B){
             currentTurn = agent.A;
         }
     }
 
     public void reset(){
         currentTurn = agent.A;
+    }
+
+    public boolean proposition(){
+        if(currentTurn == agent.A){
+            return true;
+        }else{
+            return false;
+        }
     }
 
 }

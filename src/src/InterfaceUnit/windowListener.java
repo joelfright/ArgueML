@@ -1,6 +1,6 @@
 package InterfaceUnit;
 
-import CommitmentUnit.commitment;
+import MainUnit.base;
 
 import java.awt.event.WindowEvent;
 import java.awt.event.WindowListener;
@@ -13,8 +13,7 @@ public class windowListener implements WindowListener {
     }
 
     public void windowClosing(WindowEvent arg){
-        commitment cmUnit = new commitment();
-        cmUnit.clearCommit();
+        base.instance.cm.clearCommit();;
         System.exit(0);
     }
 

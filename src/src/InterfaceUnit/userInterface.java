@@ -1,6 +1,6 @@
 package InterfaceUnit;
 
-import DialogueUnit.dialogue;
+import MainUnit.base;
 
 import javax.swing.*;
 import java.awt.*;
@@ -42,8 +42,7 @@ public class userInterface {
     private JPanel simulatePanel(){
         JButton simulate = new JButton("Simulate");
         simulate.addActionListener(e -> {
-            dialogue dia = new dialogue();
-            dia.runArgument();
+            base.instance.dia.runArgument();
         });
         JPanel simulatePanel = new JPanel();
         simulatePanel.add(simulate);

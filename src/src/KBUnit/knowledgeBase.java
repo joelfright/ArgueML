@@ -1,13 +1,17 @@
 package KBUnit;
 
-import DataHandling.csvHandler;
+import MainUnit.base;
+
 import java.util.ArrayList;
 
 public class knowledgeBase {
 
     public ArrayList<String> readKB(){
-        csvHandler csv = new csvHandler();
-        return csv.readCSV("csv Files/knowledgeBase.csv");
+        return base.instance.csv.readCSV("csv Files/knowledgeBase.csv");
+    }
+
+    public void argumentStructure(){
+
     }
 
 }
