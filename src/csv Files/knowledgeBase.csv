@@ -1,0 +1,30 @@
+CP is acceptable,TRUE,opinion,0
+CP is not acceptable,FALSE,opinion,0
+CP is a good deterrent,TRUE,opinion,1
+CP is not a  good deterrent,FALSE,opinion,1
+a state has the right to deliberately execute the wrong people,TRUE,opinion,2
+chances should be given to murderers for rehabilitation,TRUE,opinion,3
+CP makes people less likely commit serious crimes,TRUE,opinion,4
+CP definitely stops murderers commit further crimes,TRUE,fact,5
+execution of murderers is fair for the people being murdered,TRUE,opinion,6
+human lives are scarce,TRUE,opinion,7
+innocent people may get killed,TRUE,opinion,8
+it is unlikely innocent people get killed,FALSE,opinion,8
+it is wrong to take a human life,TRUE,opinion,9
+it is not always wrong to take a human life,FALSE,opinion,9
+most people want CP back,TRUE,opinion,10
+murderers should receive capital punishment,TRUE,opinion,11
+murderers should not receive capital punishment,FALSE,opinion,11
+nobody is willing to die,TRUE,opinion,12
+some people are willing to die,FALSE,opinion,12
+political and racial bias often causes prejudices,TRUE,opinion,13
+scientific techniques will increase the success of justice,TRUE,opinion,14
+there are mistakes during judicial process,TRUE,opinion,15
+mistakes rarely happen during judicial process,FALSE,opinion,15
+suicide bombers want to die,TRUE,fact,16
+CP does not give murderers opportunities for rehabilitation,TRUE,fact,17
+CP having countries like USA has higher murder rate than not having CP like UK,TRUE,evidence,18
+statistics shows an increase in murder rate since the abolition of CP,TRUE,evidence,19
+the recent survey shows that 60% British people support CP,TRUE,evidence,20
+statistics shows that repeat offences of murders are extremely low,TRUE,evidence,21
+murderers should be given chance for rehabilation,TRUE,opinion,22
