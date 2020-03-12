@@ -8,12 +8,12 @@ import java.util.ArrayList;
 public class commitment {
 
 
-    public ArrayList<String> readCommit(agent ag){
+    public ArrayList<String[]> readCommit(agent ag){
         return base.instance.csv.readCSV("csv Files/commitment" + ag.toString() +".csv");
     }
 
-    public void writeCommit(agent ag, String line){
-        base.instance.csv.writeCSV("csv Files/commitment" + ag.toString() +".csv",line);
+    public void writeCommit(agent ag, String line, int turn){
+        base.instance.csv.writeCSV("csv Files/commitment" + ag.toString() +".csv",line, turn);
     }
 
     public void clearCommit(){

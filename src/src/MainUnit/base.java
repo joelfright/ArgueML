@@ -4,6 +4,7 @@ import CommitmentUnit.commitment;
 import DataHandling.csvHandler;
 import DialogueUnit.dialogue;
 import InterfaceUnit.userInterface;
+import KBUnit.knowledgeBase;
 import PlanningUnit.planning;
 
 public class base {
@@ -16,7 +17,7 @@ public class base {
     public commitment cm = new commitment();
     public planning pl = new planning();
     public dialogue dia = new dialogue();
-    public int turn = 0;
+    public knowledgeBase kb = new knowledgeBase();
 
     private base(){
         ag = agent.A;
@@ -30,7 +31,7 @@ public class base {
         instance.boot();
     }
 
-    public void boot(){
+    private void boot(){
         UI.mainWindow();
         ag.reset();
     }
