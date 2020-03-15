@@ -11,9 +11,9 @@ public class knowledgeBase {
         return base.instance.csv.readCSV("csv Files/knowledgeBase.csv");
     }
 
-    public ArrayList<String[]> propositions(){
+    public ArrayList<String[]> propositions(Enum agen){
         String option;
-        if(base.instance.ag.getCurrentTurn() == agent.A){ option = "TRUE";}else{option = "FALSE";}
+        if(agen == agent.A){ option = "FOR";}else{option = "AGAINST";}
         ArrayList<String[]> inputs = readKB();
         ArrayList<String[]> outputs = new ArrayList<>();
         for (String[] input : inputs) {

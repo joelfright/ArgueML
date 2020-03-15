@@ -15,9 +15,9 @@ public class base {
     public userInterface UI = new userInterface();
     public csvHandler csv = new csvHandler();
     public commitment cm = new commitment();
-    public planning pl = new planning();
     public dialogue dia = new dialogue();
     public knowledgeBase kb = new knowledgeBase();
+    public planning pl = new planning();
 
     private base(){
         ag = agent.A;

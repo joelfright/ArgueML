@@ -9,6 +9,7 @@ public class userInterface {
 
     private JTextArea chatbox = new JTextArea();
 
+
     public void mainWindow(){
         JFrame mainWindow = new JFrame("ArgueML");
         mainWindow.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -41,9 +42,7 @@ public class userInterface {
 
     private JPanel simulatePanel(){
         JButton simulate = new JButton("Simulate");
-        simulate.addActionListener(e -> {
-            base.instance.dia.runArgument();
-        });
+        simulate.addActionListener(e -> base.instance.dia.runArgument());
         JPanel simulatePanel = new JPanel();
         simulatePanel.add(simulate);
 
