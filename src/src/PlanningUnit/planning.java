@@ -8,8 +8,8 @@ import java.util.ArrayList;
 
 public class planning {
 
-    public DefaultMutableTreeNode forCPTree = new DefaultMutableTreeNode("CP is acceptable");
-    public DefaultMutableTreeNode againstCPTree = new DefaultMutableTreeNode("CP is not acceptable");
+    public DefaultMutableTreeNode fullTree = new DefaultMutableTreeNode("Full");
+    public DefaultMutableTreeNode usedTree = new DefaultMutableTreeNode("Used");
     private ArrayList<String[]> forCP;
     private ArrayList<String[]> againstCP;
 
@@ -18,47 +18,50 @@ public class planning {
         againstCP  = base.instance.kb.propositions(agent.B);
     }
 
-    private DefaultMutableTreeNode addLeaf(String argument, DefaultMutableTreeNode parent, Enum ag){
+    public DefaultMutableTreeNode addLeaf(String argument, DefaultMutableTreeNode parent){
         DefaultMutableTreeNode leaf;
         leaf = new DefaultMutableTreeNode(argument);
         parent.add(leaf);
         return leaf;
     }
 
-    public void buildAgent1() {
-        DefaultMutableTreeNode deterrent, CPBack, murders, notDeterrent, notMurders;
+    public void buildTree() {
+        // for CP
+        DefaultMutableTreeNode forCPTree, deterrent, CPBack, murders, notDeterrent, notMurders;
 
-        deterrent = addLeaf(forCP.get(1)[0], forCPTree,agent.A);
-        addLeaf(forCP.get(3)[0], deterrent,agent.A);
-        notDeterrent = addLeaf(againstCP.get(1)[0],deterrent,agent.B);
-        addLeaf(againstCP.get(11)[0],notDeterrent,agent.B);
+        forCPTree = addLeaf(forCP.get(0)[0],fullTree);
 
-        CPBack = addLeaf(forCP.get(8)[0],forCPTree,agent.A);
-        addLeaf(forCP.get(14)[0],CPBack,agent.A);
+        deterrent = addLeaf(forCP.get(1)[0], forCPTree);
+        addLeaf(forCP.get(3)[0], deterrent);
+        notDeterrent = addLeaf(againstCP.get(1)[0],deterrent);
+        addLeaf(againstCP.get(11)[0],notDeterrent);
 
-        murders = addLeaf(forCP.get(9)[0], forCPTree,agent.A);
-        addLeaf(forCP.get(5)[0],murders,agent.A);
-        notMurders = addLeaf(againstCP.get(6)[0],murders,agent.B);
-        addLeaf(againstCP.get(14)[0],notMurders,agent.B);
-        addLeaf(againstCP.get(13)[0],notMurders,agent.B);
-    }
+        CPBack = addLeaf(forCP.get(8)[0],forCPTree);
+        addLeaf(forCP.get(14)[0],CPBack);
 
-    public void buildAgent2(){
-        DefaultMutableTreeNode humanLife, innoPeople, rehab, notHumanLife, unlikeInnoPeep;
+        murders = addLeaf(forCP.get(9)[0], forCPTree);
+        addLeaf(forCP.get(5)[0],murders);
+        notMurders = addLeaf(againstCP.get(6)[0],murders);
+        addLeaf(againstCP.get(14)[0],notMurders);
+        addLeaf(againstCP.get(13)[0],notMurders);
 
-        humanLife = addLeaf(againstCP.get(5)[0],againstCPTree,agent.B);
-        addLeaf(againstCP.get(3)[0],humanLife,agent.B);
-        notHumanLife = addLeaf(againstCP.get(7)[0],humanLife,agent.A);
-        addLeaf(againstCP.get(2)[0],notHumanLife,agent.A);
+        // against CP
+        DefaultMutableTreeNode againstCPTree, humanLife, innoPeople, rehab, notHumanLife, unlikeInnoPeep;
 
-        innoPeople = addLeaf(againstCP.get(4)[0],againstCPTree,agent.B);
-        addLeaf(againstCP.get(9)[0],innoPeople,agent.B);
-        unlikeInnoPeep = addLeaf(againstCP.get(6)[0],innoPeople,agent.A);
-        addLeaf(againstCP.get(11)[0],unlikeInnoPeep,agent.A);
+        againstCPTree = addLeaf(againstCP.get(0)[0],fullTree);
 
-        rehab = addLeaf(againstCP.get(14)[0],againstCPTree,agent.B);
-        addLeaf(againstCP.get(13)[0],rehab,agent.B);
+        humanLife = addLeaf(againstCP.get(5)[0],againstCPTree);
+        addLeaf(againstCP.get(3)[0],humanLife);
+        notHumanLife = addLeaf(forCP.get(7)[0],humanLife);
+        addLeaf(forCP.get(2)[0],notHumanLife);
 
+        innoPeople = addLeaf(againstCP.get(4)[0],againstCPTree);
+        addLeaf(againstCP.get(9)[0],innoPeople);
+        unlikeInnoPeep = addLeaf(forCP.get(6)[0],innoPeople);
+        addLeaf(forCP.get(11)[0],unlikeInnoPeep);
+
+        rehab = addLeaf(againstCP.get(14)[0],againstCPTree);
+        addLeaf(againstCP.get(13)[0],rehab);
     }
 
 }

@@ -1,9 +1,12 @@
 package InterfaceUnit;
 
+import MainUnit.agent;
 import MainUnit.base;
 
 import javax.swing.*;
 import javax.swing.tree.DefaultMutableTreeNode;
+import javax.swing.tree.DefaultTreeCellRenderer;
+import javax.swing.tree.TreeNode;
 import javax.swing.tree.TreePath;
 import java.awt.*;
 import java.awt.event.ItemEvent;
@@ -13,8 +16,8 @@ import java.util.stream.IntStream;
 public class userInterface {
 
     private JTextArea chatbox = new JTextArea();
-    private JTree treeFor;
-    private JTree treeAG;
+    private JTree treeFull;
+    private JTree treeUsed;
 
     public void mainWindow(){
         JFrame mainWindow = new JFrame("ArgueML");
@@ -62,11 +65,11 @@ public class userInterface {
         JToggleButton expand = new JToggleButton("Expand");
         expand.addItemListener(ev -> {
             if(ev.getStateChange()==ItemEvent.SELECTED){
-                expandAllNodes(treeFor);
-                expandAllNodes(treeAG);
+                expandAllNodes(treeFull);
+                expandAllNodes(treeUsed);
             } else if(ev.getStateChange()==ItemEvent.DESELECTED){
-                collapseAllNodes(treeFor);
-                collapseAllNodes(treeAG);
+                collapseAllNodes(treeFull);
+                expandAllNodes(treeUsed);
             }
         });
         JPanel expandPanel = new JPanel();
@@ -89,18 +92,17 @@ public class userInterface {
     }
 
     private void createTree(){
-        treeFor = new JTree(base.instance.pl.forCPTree);
-        treeAG = new JTree(base.instance.pl.againstCPTree);
+        treeFull = new JTree(base.instance.pl.fullTree);
+        treeUsed = new JTree(base.instance.pl.usedTree);
     }
-
 
     private JPanel sidePanelLeft(){
         JPanel sidePanel = new JPanel();
         sidePanel.setPreferredSize(new Dimension(450,465));
-        sidePanel.add(new JLabel("Agent A"));
-        sidePanel.add(treePanel(treeFor));
-        sidePanel.add(new JLabel("Agent B"));
-        sidePanel.add(treePanel(treeAG));
+        sidePanel.add(new JLabel("Full Tree"));
+        sidePanel.add(treePanel(treeFull));
+        sidePanel.add(new JLabel("Used Tree"));
+        sidePanel.add(treePanel(treeUsed));
 
         return sidePanel;
     }
@@ -128,6 +130,9 @@ public class userInterface {
             tree.collapseRow(i);
             i++;
         }
+    }
+
+    public void test(){
     }
 
     private int getWindowWidth(){
