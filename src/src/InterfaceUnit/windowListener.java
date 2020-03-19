@@ -13,7 +13,7 @@ public class windowListener implements WindowListener {
     }
 
     public void windowClosing(WindowEvent arg){
-        base.instance.cm.clearCommit();;
+        base.instance.cm.clearCommit();
         System.exit(0);
     }
 

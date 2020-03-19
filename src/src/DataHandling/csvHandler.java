@@ -58,12 +58,10 @@ public class csvHandler {
         BufferedWriter br = null;
 
         try{
-            try{
-                br = new BufferedWriter(new FileWriter(csvFile,false));
-                br.write("");
-            }catch (IOException e){
-                e.printStackTrace();
-            }
+            br = new BufferedWriter(new FileWriter(csvFile,false));
+            br.write("");
+        }catch (IOException e){
+            e.printStackTrace();
         }finally{
             if(br != null){
                 try{

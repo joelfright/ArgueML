@@ -23,10 +23,6 @@ public class base {
         ag = agent.A;
     }
 
-    public static base getInstance(){
-        return instance;
-    }
-
     public static void main(String[] args){
         instance.boot();
     }
@@ -36,8 +32,5 @@ public class base {
         ag.reset();
     }
 
-    public void run(){
-
-    }
 
 }

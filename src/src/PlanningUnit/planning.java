@@ -9,16 +9,14 @@ import java.util.ArrayList;
 public class planning {
 
     public DefaultMutableTreeNode fullTree = new DefaultMutableTreeNode("Full");
-    public DefaultMutableTreeNode usedTree = new DefaultMutableTreeNode("Used");
-    private ArrayList<String[]> forCP;
-    private ArrayList<String[]> againstCP;
+    private ArrayList<String[]> forCP, againstCP;
 
     public void initPlanning(){
         forCP = base.instance.kb.propositions(agent.A);
         againstCP  = base.instance.kb.propositions(agent.B);
     }
 
-    public DefaultMutableTreeNode addLeaf(String argument, DefaultMutableTreeNode parent){
+    private DefaultMutableTreeNode addLeaf(String argument, DefaultMutableTreeNode parent){
         DefaultMutableTreeNode leaf;
         leaf = new DefaultMutableTreeNode(argument);
         parent.add(leaf);

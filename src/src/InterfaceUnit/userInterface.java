@@ -1,23 +1,15 @@
 package InterfaceUnit;
 
-import MainUnit.agent;
 import MainUnit.base;
 
 import javax.swing.*;
-import javax.swing.tree.DefaultMutableTreeNode;
-import javax.swing.tree.DefaultTreeCellRenderer;
-import javax.swing.tree.TreeNode;
-import javax.swing.tree.TreePath;
 import java.awt.*;
 import java.awt.event.ItemEvent;
-import java.awt.event.ItemListener;
-import java.util.stream.IntStream;
 
 public class userInterface {
 
     private JTextArea chatbox = new JTextArea();
     private JTree treeFull;
-    private JTree treeUsed;
 
     public void mainWindow(){
         JFrame mainWindow = new JFrame("ArgueML");
@@ -66,10 +58,8 @@ public class userInterface {
         expand.addItemListener(ev -> {
             if(ev.getStateChange()==ItemEvent.SELECTED){
                 expandAllNodes(treeFull);
-                expandAllNodes(treeUsed);
             } else if(ev.getStateChange()==ItemEvent.DESELECTED){
                 collapseAllNodes(treeFull);
-                expandAllNodes(treeUsed);
             }
         });
         JPanel expandPanel = new JPanel();
@@ -84,7 +74,7 @@ public class userInterface {
         treeScrollPane.setLocation(10,10);
         treeScrollPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
         treeScrollPane.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
-        treeScrollPane.setPreferredSize(new Dimension(450, 205));
+        treeScrollPane.setPreferredSize(new Dimension(450, 436));
         treeScrollPane.setBorder(BorderFactory.createLineBorder(Color.black));
         treeScrollPane.setBackground(Color.white);
 
@@ -93,7 +83,6 @@ public class userInterface {
 
     private void createTree(){
         treeFull = new JTree(base.instance.pl.fullTree);
-        treeUsed = new JTree(base.instance.pl.usedTree);
     }
 
     private JPanel sidePanelLeft(){
@@ -101,8 +90,6 @@ public class userInterface {
         sidePanel.setPreferredSize(new Dimension(450,465));
         sidePanel.add(new JLabel("Full Tree"));
         sidePanel.add(treePanel(treeFull));
-        sidePanel.add(new JLabel("Used Tree"));
-        sidePanel.add(treePanel(treeUsed));
 
         return sidePanel;
     }
@@ -130,9 +117,6 @@ public class userInterface {
             tree.collapseRow(i);
             i++;
         }
-    }
-
-    public void test(){
     }
 
     private int getWindowWidth(){

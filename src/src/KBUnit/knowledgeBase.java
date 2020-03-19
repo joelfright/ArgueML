@@ -8,7 +8,7 @@ import java.util.ArrayList;
 public class knowledgeBase {
 
     private ArrayList<String[]> readKB(){
-        return base.instance.csv.readCSV("csv Files/knowledgeBase.csv");
+        return base.instance.csv.readCSV("src/csv Files/knowledgeBase.csv");
     }
 
     public ArrayList<String[]> propositions(Enum agen){
