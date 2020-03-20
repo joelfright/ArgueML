@@ -3,9 +3,7 @@ package DialogueUnit;
 import MainUnit.agent;
 import MainUnit.base;
 
-import javax.swing.tree.DefaultMutableTreeNode;
 import javax.swing.tree.TreeNode;
-import javax.swing.tree.TreePath;
 import java.util.Random;
 
 public class dialogue {
@@ -13,6 +11,7 @@ public class dialogue {
     private TreeNode currentTree = null;
     private int player, index;
     private boolean[][] used = new boolean[3][2];
+    private double randomness = 0.5;
 
     private void argue(agent ag, String argument){
         base.instance.cm.writeCommit(ag, argument, ag.getTurnCounter());
@@ -52,11 +51,13 @@ public class dialogue {
 
     private void argument(TreeNode branch){
         proposal(branch);
-        if(branch.getChildCount() > 1 && Math.random() > 0.5){
+        if(branch.getChildCount() > 1  && Math.random() > randomness && branch.getChildAt(1).getAllowsChildren()){
             rebuttal(branch.getChildAt(1));
         }
-        question(branch);
-        evidence(branch);
+        if(Math.random() > randomness){
+            question(branch);
+            evidence(branch);
+        }
     }
 
     private void proposal(TreeNode branch){
@@ -78,10 +79,13 @@ public class dialogue {
     private void rebuttal(TreeNode branch){
         argue(base.instance.ag.getCurrentTurn(), "I think " + branch);
         base.instance.ag.nextTurn();
-        argue(base.instance.ag.getCurrentTurn(), "Why do you think " + branch + "?");
-        base.instance.ag.nextTurn();
-        argue(base.instance.ag.getCurrentTurn(), "Because " + branch.getChildAt(0));
+        if(Math.random() > randomness){
+            argue(base.instance.ag.getCurrentTurn(), "Why do you think " + branch + "?");
+            base.instance.ag.nextTurn();
+            argue(base.instance.ag.getCurrentTurn(), "Because " + branch.getChildAt(0));
+        }else{
+            base.instance.ag.nextTurn();
+        }
     }
-
 
 }

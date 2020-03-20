@@ -6,6 +6,7 @@ import DialogueUnit.dialogue;
 import InterfaceUnit.userInterface;
 import KBUnit.knowledgeBase;
 import PlanningUnit.planning;
+import PlanningUnit.reward;
 
 public class base {
 
@@ -18,6 +19,7 @@ public class base {
     public dialogue dia = new dialogue();
     public knowledgeBase kb = new knowledgeBase();
     public planning pl = new planning();
+    public reward rw = new reward();
 
     private base(){
         ag = agent.A;
@@ -31,6 +33,5 @@ public class base {
         UI.mainWindow();
         ag.reset();
     }
-
 
 }
