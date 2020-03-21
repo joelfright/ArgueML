@@ -5,6 +5,7 @@ import DataHandling.csvHandler;
 import DialogueUnit.dialogue;
 import InterfaceUnit.userInterface;
 import KBUnit.knowledgeBase;
+import MLUnit.qLearning;
 import PlanningUnit.planning;
 import PlanningUnit.reward;
 
@@ -20,6 +21,7 @@ public class base {
     public knowledgeBase kb = new knowledgeBase();
     public planning pl = new planning();
     public reward rw = new reward();
+    public qLearning ql = new qLearning();
 
     private base(){
         ag = agent.A;

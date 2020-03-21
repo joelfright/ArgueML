@@ -26,6 +26,7 @@ public class userInterface {
         mainPanel.add(sidePanelRight());
         mainPanel.add(sidePanelLeft());
         mainPanel.add(simulatePanel());
+        mainPanel.add(resetPanel());
         mainPanel.add(expandPanel());
         mainWindow.pack();
 
@@ -51,6 +52,18 @@ public class userInterface {
         simulatePanel.add(simulate);
 
         return simulatePanel;
+    }
+
+    private JPanel resetPanel(){
+        JButton reset = new JButton("Reset");
+        reset.addActionListener(ev -> {
+            base.instance.dia.resetArgument();
+            chatbox.setText("");
+        });
+        JPanel resetPanel = new JPanel();
+        resetPanel.add(reset);
+
+        return resetPanel;
     }
 
     private JPanel expandPanel(){

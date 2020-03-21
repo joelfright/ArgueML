@@ -33,7 +33,7 @@ public class planning {
     public void buildTree() {
         // for CP
         DefaultMutableTreeNode forCPTree, deterrent, CPBack, murders, notDeterrent, notMurders;
-        DefaultMutableTreeNode notMurdersEvid, notDeterrentEvid, deterrentEvid, CPBackEvid, murdersEvid;
+        DefaultMutableTreeNode notMurdersEvid1, notMurdersEvid2, notDeterrentEvid, deterrentEvid, CPBackEvid, murdersEvid;
 
         forCPTree = addLeaf(forCP.get(0)[0],fullTree);
 
@@ -48,26 +48,27 @@ public class planning {
         murders = addLeaf(forCP.get(9)[0], forCPTree);
         murdersEvid = addLeaf(forCP.get(5)[0],murders);
         notMurders = addLeaf(againstCP.get(6)[0],murders);
-        addLeaf(againstCP.get(14)[0],notMurders);
-        notMurdersEvid = addLeaf(againstCP.get(13)[0],notMurders);
+        notMurdersEvid1 = addLeaf(againstCP.get(13)[0],notMurders);
+        notMurdersEvid2 = addLeaf(againstCP.get(14)[0],notMurders);
 
         //reward for
         addLeafInt(reward[0],notDeterrentEvid).setAllowsChildren(false);
         addLeafInt(reward[1],murdersEvid).setAllowsChildren(false);
-        addLeafInt(reward[2],notMurdersEvid).setAllowsChildren(false);
+        addLeafInt(reward[2],notMurdersEvid1).setAllowsChildren(false);
         addLeafInt(reward[4],CPBackEvid).setAllowsChildren(false);
         addLeafInt(reward[5],deterrentEvid).setAllowsChildren(false);
+        addLeafInt(reward[6],notMurdersEvid2).setAllowsChildren(false);
 
         // against CP
         DefaultMutableTreeNode againstCPTree, humanLife, innoPeople, rehab, notHumanLife, unlikeInnoPeep;
-        DefaultMutableTreeNode innoPeopleEvid, unlikeInnoPeopleEvid, rehabEvid;
+        DefaultMutableTreeNode innoPeopleEvid, unlikeInnoPeopleEvid, rehabEvid, humanLifeEvid, notHumanLifeEvid;
 
         againstCPTree = addLeaf(againstCP.get(0)[0],fullTree);
 
         humanLife = addLeaf(againstCP.get(5)[0],againstCPTree);
-        addLeaf(againstCP.get(3)[0],humanLife);
+        humanLifeEvid = addLeaf(againstCP.get(3)[0],humanLife);
         notHumanLife = addLeaf(forCP.get(7)[0],humanLife);
-        addLeaf(forCP.get(2)[0],notHumanLife);
+        notHumanLifeEvid = addLeaf(forCP.get(2)[0],notHumanLife);
 
         innoPeople = addLeaf(againstCP.get(4)[0],againstCPTree);
         innoPeopleEvid = addLeaf(againstCP.get(9)[0],innoPeople);
@@ -82,6 +83,8 @@ public class planning {
         addLeafInt(reward[3],innoPeopleEvid).setAllowsChildren(false);
         addLeafInt(reward[6],rehab).setAllowsChildren(false);
         addLeafInt(reward[7],unlikeInnoPeopleEvid).setAllowsChildren(false);
+        addLeafInt(reward[8],humanLifeEvid).setAllowsChildren(false);
+        addLeafInt(reward[8],notHumanLifeEvid).setAllowsChildren(false);
 
     }
 

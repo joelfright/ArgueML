@@ -12,21 +12,26 @@ public class dialogue {
     private int player, index;
     private boolean[][] used = new boolean[3][2];
     private double randomness = 0.5;
+    private boolean alreadyExecuted = false;
+    private int[] rewardTotal = new int[2];
 
-    private void argue(agent ag, String argument){
+    private void makeMove(agent ag, String argument){
         base.instance.cm.writeCommit(ag, argument, ag.getTurnCounter());
         base.instance.UI.setChatbox("     " + base.instance.ag.getCurrentTurn().toString() + ": " + argument + "     ");
     }
 
     public void runArgument(){
-        base.instance.pl.initPlanning();
-        base.instance.pl.buildTree();
+        if(!alreadyExecuted) {
+            base.instance.pl.initPlanning();
+            base.instance.pl.buildTree();
+            alreadyExecuted = true;
+        }
 
         Random rand = new Random();
         do {
             while (base.instance.ag.getTurnCounter() == 1) {
                 getCurrentTree();
-                argue(base.instance.ag.getCurrentTurn(), currentTree.toString());
+                makeMove(base.instance.ag.getCurrentTurn(), currentTree.toString());
                 base.instance.ag.nextTurn();
             }
             getCurrentTree();
@@ -36,17 +41,17 @@ public class dialogue {
             TreeNode branch = currentTree.getChildAt(index);
             argument(branch);
         }while(!(used[0][0] && used[1][0] && used[2][0] && used[0][1] && used[1][1] && used[2][1]));
-
+        System.out.println("A: " + getReward(0));
+        System.out.println("B: " + getReward(1));
     }
 
     private void getCurrentTree(){
         if(base.instance.ag.getCurrentTurn() == agent.A){
             player = 0;
-            currentTree = base.instance.pl.fullTree.getChildAt(0);
         }else{
             player = 1;
-            currentTree = base.instance.pl.fullTree.getChildAt(1);
         }
+        currentTree = base.instance.pl.fullTree.getChildAt(player);
     }
 
     private void argument(TreeNode branch){
@@ -61,31 +66,62 @@ public class dialogue {
     }
 
     private void proposal(TreeNode branch){
-        argue(base.instance.ag.getCurrentTurn(), "I think " + branch);
+        makeMove(base.instance.ag.getCurrentTurn(), "I think " + branch);
         used[index][player] = true;
         base.instance.ag.nextTurn();
     }
 
     private void question(TreeNode branch){
-        argue(base.instance.ag.getCurrentTurn(), "Why do you think " + branch + "?");
+        makeMove(base.instance.ag.getCurrentTurn(), "Why do you think " + branch + "?");
         base.instance.ag.nextTurn();
     }
 
     private void evidence(TreeNode branch){
-        argue(base.instance.ag.getCurrentTurn(), "Because " + branch.getChildAt(0));
+        makeMove(base.instance.ag.getCurrentTurn(), "Because " + branch.getChildAt(0) + " - " + branch.getChildAt(0).getChildAt(0).toString());
+        appendReward(Integer.parseInt(branch.getChildAt(0).getChildAt(0).toString()));
         base.instance.ag.nextTurn();
     }
 
     private void rebuttal(TreeNode branch){
-        argue(base.instance.ag.getCurrentTurn(), "I think " + branch);
+        makeMove(base.instance.ag.getCurrentTurn(), "I think " + branch);
         base.instance.ag.nextTurn();
         if(Math.random() > randomness){
-            argue(base.instance.ag.getCurrentTurn(), "Why do you think " + branch + "?");
+            makeMove(base.instance.ag.getCurrentTurn(), "Why do you think " + branch + "?");
             base.instance.ag.nextTurn();
-            argue(base.instance.ag.getCurrentTurn(), "Because " + branch.getChildAt(0));
+            makeMove(base.instance.ag.getCurrentTurn(), "Because " + branch.getChildAt(0) + " - " + branch.getChildAt(0).getChildAt(0).toString());
+            appendReward(Integer.parseInt(branch.getChildAt(0).getChildAt(0).toString()));
         }else{
             base.instance.ag.nextTurn();
         }
+    }
+
+    private int getPlayer(){
+        int currentTurn;
+        if(base.instance.ag.getCurrentTurn() == agent.A){
+            currentTurn = 0;
+        }else{
+            currentTurn = 1;
+        }
+        return currentTurn;
+    }
+
+    private void appendReward(int reward){
+        rewardTotal[getPlayer()] = rewardTotal[getPlayer()] + reward;
+    }
+
+    private int getReward(int player){
+        return rewardTotal[player];
+    }
+
+    public void resetArgument(){
+        for(int i = 0; i < used.length; i++){
+            used[i][0] = false;
+            used[i][1] = false;
+        }
+        rewardTotal[0] = 0;
+        rewardTotal[1] = 0;
+        base.instance.cm.clearCommit();
+        base.instance.ag.reset();
     }
 
 }
