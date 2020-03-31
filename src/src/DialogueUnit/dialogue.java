@@ -40,9 +40,16 @@ public class dialogue {
             }while(used[index][player]);
             TreeNode branch = currentTree.getChildAt(index);
             argument(branch);
+            if(index == 2 && player == 1){
+                appendReward(Integer.parseInt(branch.getChildAt(1).toString()));
+            }
+            base.instance.ql.addReward(0,index,index,10,getPlayer());
         }while(!(used[0][0] && used[1][0] && used[2][0] && used[0][1] && used[1][1] && used[2][1]));
-        System.out.println("A: " + getReward(0));
-        System.out.println("B: " + getReward(1));
+
+        System.out.println("A: ");
+        base.instance.ql.printQTable(0);
+        System.out.println("B: ");
+        base.instance.ql.printQTable(1);
     }
 
     private void getCurrentTree(){
@@ -77,7 +84,7 @@ public class dialogue {
     }
 
     private void evidence(TreeNode branch){
-        makeMove(base.instance.ag.getCurrentTurn(), "Because " + branch.getChildAt(0) + " - " + branch.getChildAt(0).getChildAt(0).toString());
+        makeMove(base.instance.ag.getCurrentTurn(), "Because " + branch.getChildAt(0));
         appendReward(Integer.parseInt(branch.getChildAt(0).getChildAt(0).toString()));
         base.instance.ag.nextTurn();
     }
@@ -85,24 +92,26 @@ public class dialogue {
     private void rebuttal(TreeNode branch){
         makeMove(base.instance.ag.getCurrentTurn(), "I think " + branch);
         base.instance.ag.nextTurn();
+
         if(Math.random() > randomness){
             makeMove(base.instance.ag.getCurrentTurn(), "Why do you think " + branch + "?");
             base.instance.ag.nextTurn();
-            makeMove(base.instance.ag.getCurrentTurn(), "Because " + branch.getChildAt(0) + " - " + branch.getChildAt(0).getChildAt(0).toString());
-            appendReward(Integer.parseInt(branch.getChildAt(0).getChildAt(0).toString()));
+            if(branch.getChildCount() == 1) {
+                makeMove(base.instance.ag.getCurrentTurn(), "Because " + branch.getChildAt(0));
+                appendReward(Integer.parseInt(branch.getChildAt(0).getChildAt(0).toString()));
+            }else{
+                Random rand = new Random();
+                int i = rand.nextInt(2);
+                makeMove(base.instance.ag.getCurrentTurn(), "Because " + branch.getChildAt(i));
+                appendReward(Integer.parseInt(branch.getChildAt(i).getChildAt(0).toString()));
+            }
         }else{
             base.instance.ag.nextTurn();
         }
     }
 
     private int getPlayer(){
-        int currentTurn;
-        if(base.instance.ag.getCurrentTurn() == agent.A){
-            currentTurn = 0;
-        }else{
-            currentTurn = 1;
-        }
-        return currentTurn;
+        return base.instance.ag.getCurrentTurn() == agent.A ? 0 : 1;
     }
 
     private void appendReward(int reward){
