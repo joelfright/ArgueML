@@ -4,19 +4,21 @@ import java.text.DecimalFormat;
 
 public class qLearning {
 
-    private double[][] QTableFor = new double[4][3];
-    private double[][] QTableAg = new double[4][3];
+    public double[][] QTableFor = new double[10][4];
+    public double[][] QTableAg = new double[11][4];
     private static DecimalFormat df = new DecimalFormat("0.00");
 
-    public void addReward(int state, int action, int newState, int reward, int player){
+    public double calcReward(int state, int reward, int player){
         double gamma = 0.8;
         int alpha = 1;
+        double newReward = 0;
         if(player == 0) {
-            QTableFor[state][action] = (1- alpha)*state + alpha *(reward + (gamma * findMax(QTableFor, newState)));
+            newReward = (1- alpha)*state + alpha *(reward + (gamma * findMax(QTableFor, state)));
         }
         if(player == 1){
-            QTableAg[state][action] = (1- alpha)*state + alpha *(reward + (gamma * findMax(QTableAg, newState)));
+            newReward = (1- alpha)*state + alpha *(reward + (gamma * findMax(QTableAg, state)));
         }
+        return newReward;
     }
 
     private double findMax(double[][] QTable, int state){
@@ -33,10 +35,10 @@ public class qLearning {
         double[][] QTable;
         if(player == 1) QTable = QTableFor;
         else QTable = QTableAg;
-        for(int i = 0; i < 4 ;i++){
+        for (double[] doubles : QTable) {
             System.out.print("[");
-            for(int j = 0; j < 3;j++){
-                System.out.print(" " + df.format(QTable[i][j]) + " ");
+            for (int j = 0; j < QTable[1].length; j++) {
+                System.out.print(" " + df.format(doubles[j]) + " ");
             }
             System.out.println("]");
         }

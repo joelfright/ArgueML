@@ -9,6 +9,7 @@ import java.awt.event.ItemEvent;
 public class userInterface {
 
     private JTextArea chatbox = new JTextArea();
+    private JTextField numSim = new JTextField();
     private JTree treeFull;
 
     public void mainWindow(){
@@ -25,6 +26,8 @@ public class userInterface {
         mainWindow.add(mainPanel);
         mainPanel.add(sidePanelRight());
         mainPanel.add(sidePanelLeft());
+        mainPanel.add(numSimPanel());
+        mainPanel.add(runMLPanel());
         mainPanel.add(simulatePanel());
         mainPanel.add(resetPanel());
         mainPanel.add(expandPanel());
@@ -64,6 +67,28 @@ public class userInterface {
         resetPanel.add(reset);
 
         return resetPanel;
+    }
+
+    private JPanel runMLPanel(){
+        JButton MLButton = new JButton("Run ML");
+        MLButton.addActionListener(ev ->{
+            for(int i = 0; i < Integer.parseInt(numSim.getText()); i++){
+                base.instance.dia.runArgument();
+                base.instance.dia.resetArgument();
+                chatbox.setText("");
+            }
+        });
+        JPanel runMLPanel = new JPanel();
+        runMLPanel.add(MLButton);
+
+        return runMLPanel;
+    }
+
+    private JPanel numSimPanel(){
+        numSim.setPreferredSize(new Dimension(50,25));
+        JPanel numSimPanel = new JPanel();
+        numSimPanel.add(numSim);
+        return numSimPanel;
     }
 
     private JPanel expandPanel(){

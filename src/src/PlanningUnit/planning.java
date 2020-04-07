@@ -9,7 +9,7 @@ import java.util.ArrayList;
 public class planning {
 
     public DefaultMutableTreeNode fullTree = new DefaultMutableTreeNode("Full");
-    private ArrayList<String[]> forCP, againstCP;
+    public ArrayList<String[]> forCP, againstCP;
     private int[] reward;
 
     public void initPlanning(){
@@ -37,19 +37,19 @@ public class planning {
 
         forCPTree = addLeaf(forCP.get(0)[0],fullTree);
 
-        deterrent = addLeaf(forCP.get(1)[0], forCPTree);
-        deterrentEvid = addLeaf(forCP.get(3)[0], deterrent);
-        notDeterrent = addLeaf(againstCP.get(1)[0],deterrent);
-        notDeterrentEvid = addLeaf(againstCP.get(11)[0],notDeterrent);
+        deterrent = addLeaf(forCP.get(1)[0], forCPTree); //1 FOR
+        deterrentEvid = addLeaf(forCP.get(3)[0], deterrent); //2 FOR
+        notDeterrent = addLeaf(againstCP.get(1)[0],deterrent);  //7 AGAINST
+        notDeterrentEvid = addLeaf(againstCP.get(11)[0],notDeterrent); //8 AGAINST
 
-        CPBack = addLeaf(forCP.get(8)[0],forCPTree);
-        CPBackEvid = addLeaf(forCP.get(14)[0],CPBack);
+        CPBack = addLeaf(forCP.get(8)[0],forCPTree); //3 FOR
+        CPBackEvid = addLeaf(forCP.get(14)[0],CPBack); //4 FOR
 
-        murders = addLeaf(forCP.get(9)[0], forCPTree);
-        murdersEvid = addLeaf(forCP.get(5)[0],murders);
-        notMurders = addLeaf(againstCP.get(6)[0],murders);
-        notMurdersEvid1 = addLeaf(againstCP.get(13)[0],notMurders);
-        notMurdersEvid2 = addLeaf(againstCP.get(14)[0],notMurders);
+        murders = addLeaf(forCP.get(9)[0], forCPTree); //5 FOR
+        murdersEvid = addLeaf(forCP.get(5)[0],murders); //6 FOR
+        notMurders = addLeaf(againstCP.get(6)[0],murders); //9 AGAINST
+        notMurdersEvid1 = addLeaf(againstCP.get(14)[0],notMurders); //10 AGAINST
+        notMurdersEvid2 = addLeaf(againstCP.get(16)[0],notMurders); //11 AGAINST
 
         //reward for
         addLeafInt(reward[0],notDeterrentEvid).setAllowsChildren(false);
@@ -65,18 +65,18 @@ public class planning {
 
         againstCPTree = addLeaf(againstCP.get(0)[0],fullTree);
 
-        humanLife = addLeaf(againstCP.get(5)[0],againstCPTree);
-        humanLifeEvid = addLeaf(againstCP.get(3)[0],humanLife);
-        notHumanLife = addLeaf(forCP.get(7)[0],humanLife);
-        notHumanLifeEvid = addLeaf(forCP.get(2)[0],notHumanLife);
+        humanLife = addLeaf(againstCP.get(5)[0],againstCPTree); //1 AGAINST
+        humanLifeEvid = addLeaf(againstCP.get(3)[0],humanLife); //2 AGAINST
+        notHumanLife = addLeaf(forCP.get(7)[0],humanLife); //7 FOR
+        notHumanLifeEvid = addLeaf(forCP.get(2)[0],notHumanLife); //8 FOR
 
-        innoPeople = addLeaf(againstCP.get(4)[0],againstCPTree);
-        innoPeopleEvid = addLeaf(againstCP.get(9)[0],innoPeople);
-        unlikeInnoPeep = addLeaf(forCP.get(6)[0],innoPeople);
-        unlikeInnoPeopleEvid = addLeaf(forCP.get(11)[0],unlikeInnoPeep);
+        innoPeople = addLeaf(againstCP.get(4)[0],againstCPTree); //3 AGAINST
+        innoPeopleEvid = addLeaf(againstCP.get(9)[0],innoPeople); //4 AGAINST
+        unlikeInnoPeep = addLeaf(forCP.get(6)[0],innoPeople); //9 FOR
+        unlikeInnoPeopleEvid = addLeaf(forCP.get(11)[0],unlikeInnoPeep); //10 FOR
 
-        rehab = addLeaf(againstCP.get(14)[0],againstCPTree);
-        rehabEvid = addLeaf(againstCP.get(13)[0],rehab);
+        rehab = addLeaf(againstCP.get(15)[0],againstCPTree); //5 AGAINST
+        rehabEvid = addLeaf(againstCP.get(13)[0],rehab); //6 AGAINST
 
         //reward against
         addLeafInt(reward[2],rehabEvid).setAllowsChildren(false);
