@@ -4,8 +4,8 @@ import java.text.DecimalFormat;
 
 public class qLearning {
 
-    public double[][] QTableFor = new double[10][4];
-    public double[][] QTableAg = new double[11][4];
+    public double[][] QTableFor = new double[3][6];
+    public double[][] QTableAg = new double[3][6];
     private static DecimalFormat df = new DecimalFormat("0.00");
 
     public double calcReward(int state, int reward, int player){
@@ -33,14 +33,15 @@ public class qLearning {
 
     public void printQTable(int player){
         double[][] QTable;
-        if(player == 1) QTable = QTableFor;
+        if(player == 0) QTable = QTableFor;
         else QTable = QTableAg;
         for (double[] doubles : QTable) {
-            System.out.print("[");
-            for (int j = 0; j < QTable[1].length; j++) {
-                System.out.print(" " + df.format(doubles[j]) + " ");
-            }
-            System.out.println("]");
+                System.out.print("[");
+                for (int j = 0; j < QTable[1].length; j++) {
+                    System.out.print(" " + df.format(doubles[j]) + " ");
+                }
+                System.out.println("]");
+
         }
     }
 
