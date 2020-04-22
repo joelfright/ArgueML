@@ -79,7 +79,7 @@ public class dialogue {
     private void proposal(TreeNode branch){
         setCurrentBranch(branch);
         makeMove(base.instance.ag.getCurrentTurn(), "I think " + branch);
-        updateQTable();
+        updateQTable(0,getReward(1));
         used[index][player] = true;
         base.instance.ag.nextTurn();
     }
@@ -87,23 +87,21 @@ public class dialogue {
     private void question(TreeNode branch){
         makeMove(base.instance.ag.getCurrentTurn(), "Why do you think " + branch + "?");
         setCurrentBranch(branch);
-        //updateQTable();
         base.instance.ag.nextTurn();
     }
 
     private void evidence(TreeNode branch){
         makeMove(base.instance.ag.getCurrentTurn(), "Because " + branch.getChildAt(0));
         setCurrentBranch(branch.getChildAt(0));
-        updateQTable();
+        updateQTable(1,getReward(2));
         base.instance.ag.nextTurn();
     }
 
     private void rebuttal(TreeNode branch){
         makeMove(base.instance.ag.getCurrentTurn(), "I think " + branch);
         setCurrentBranch(branch);
-        updateQTable();
+        updateQTable(0,getReward(1));
         base.instance.ag.nextTurn();
-
         if(Math.random() > randomness){
             makeMove(base.instance.ag.getCurrentTurn(), "Why do you think " + branch + "?");
             base.instance.ag.nextTurn();
@@ -116,13 +114,22 @@ public class dialogue {
                 makeMove(base.instance.ag.getCurrentTurn(), "Because " + branch.getChildAt(i));
                 setCurrentBranch(branch.getChildAt(i));
             }
-            updateQTable();
+
+            updateQTable(1, getReward(2));
         }else{
             base.instance.ag.nextTurn();
         }
     }
 
-    public void updateQTable(){
+    public int getReward(int level){
+        if(level == 1){
+            return Integer.parseInt(currentBranch.getChildAt(0).getChildAt(0).toString());
+        }else{
+            return Integer.parseInt(currentBranch.getChildAt(0).toString());
+        }
+    }
+
+    public void updateQTable(int actionType, int reward){
         int level = 0;
         int position = 0;
         if(getPlayer() == 0){
@@ -133,7 +140,7 @@ public class dialogue {
                     break;
                 }
             }
-            base.instance.ql.QTableFor[level][position] = base.instance.ql.calcReward(level,10,0);
+            base.instance.ql.QTableFor[level][position][0] = base.instance.ql.calcReward(level,position,reward,0);
         }else{
             for(int i = 0; i < base.instance.pl.againstCP.size(); i++){
                 if(getCurrentBranch().toString().equals(base.instance.pl.againstCP.get(i)[0])){
@@ -150,7 +157,7 @@ public class dialogue {
                     break;
                 }
             }
-            base.instance.ql.QTableAg[level][position] = base.instance.ql.calcReward(level,10,1);
+            base.instance.ql.QTableAg[level][position][actionType] = base.instance.ql.calcReward(level,position,reward,1);
         }
     }
 
