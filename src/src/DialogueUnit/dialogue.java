@@ -41,7 +41,6 @@ public class dialogue {
             TreeNode branch = currentTree.getChildAt(index);
             argument(branch);
         }while(!(used[0][0] && used[1][0] && used[2][0] && used[0][1] && used[1][1] && used[2][1]));
-
         System.out.println("A: ");
         base.instance.ql.printQTable(0);
         System.out.println("B: ");
@@ -67,10 +66,10 @@ public class dialogue {
 
     private void argument(TreeNode branch){
         proposal(branch);
-        if(branch.getChildCount() > 1  && Math.random() > randomness && branch.getChildAt(1).getAllowsChildren()){
+        if(branch.getChildCount() > 1  && Math.random() < randomness && branch.getChildAt(1).getAllowsChildren()){
             rebuttal(branch.getChildAt(1));
         }
-        if(Math.random() > randomness){
+        if(Math.random() < randomness){
             question(branch);
             evidence(branch);
         }
@@ -102,7 +101,7 @@ public class dialogue {
         setCurrentBranch(branch);
         updateQTable(0,getReward(1));
         base.instance.ag.nextTurn();
-        if(Math.random() > randomness){
+        if(Math.random() < randomness){
             makeMove(base.instance.ag.getCurrentTurn(), "Why do you think " + branch + "?");
             base.instance.ag.nextTurn();
             if(branch.getChildCount() == 1) {
@@ -114,7 +113,6 @@ public class dialogue {
                 makeMove(base.instance.ag.getCurrentTurn(), "Because " + branch.getChildAt(i));
                 setCurrentBranch(branch.getChildAt(i));
             }
-
             updateQTable(1, getReward(2));
         }else{
             base.instance.ag.nextTurn();
@@ -140,24 +138,18 @@ public class dialogue {
                     break;
                 }
             }
-            base.instance.ql.QTableFor[level][position][0] = base.instance.ql.calcReward(level,position,reward,0);
+            base.instance.ql.QTableFor[level][position][actionType] = base.instance.ql.calcReward(level,position,reward,0);
+            base.instance.rl.writeResults(0,randomness);
         }else{
             for(int i = 0; i < base.instance.pl.againstCP.size(); i++){
                 if(getCurrentBranch().toString().equals(base.instance.pl.againstCP.get(i)[0])){
                     level = Integer.parseInt(base.instance.pl.againstCP.get(i)[2]);
                     position = Integer.parseInt(base.instance.pl.againstCP.get(i)[3]);
-                    if(Integer.parseInt(base.instance.pl.againstCP.get(i)[4]) == 13){
-                        level = 1; position = 5;
-                        break;
-                    }
-                    if(Integer.parseInt(base.instance.pl.againstCP.get(i)[4]) == 15){
-                        level = 0; position = 5;
-                        break;
-                    }
                     break;
                 }
             }
             base.instance.ql.QTableAg[level][position][actionType] = base.instance.ql.calcReward(level,position,reward,1);
+            base.instance.rl.writeResults(1,randomness);
         }
     }
 

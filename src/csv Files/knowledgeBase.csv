@@ -18,7 +18,7 @@ murderers should not receive capital punishment,AGAINST,1,2,6
 nobody is willing to die,AGAINST,,,7
 some people are willing to die,FOR,,,10
 political and racial bias often causes prejudices,AGAINST,,,8
-scientific techniques will increase the success of justice,FOR,2,2,11
+scientific techniques will increase the success of justice,FOR,2,4,11
 there are mistakes during judicial process,AGAINST,1,4,9
 mistakes rarely happen during judicial process,FOR,,,12
 suicide bombers want to die,FOR,,,13
@@ -26,7 +26,7 @@ CP does not give murderers opportunities for rehabilitation,AGAINST,,,10
 CP having countries like USA has higher murder rate than not having CP like UK,AGAINST,2,0,11
 statistics shows an increase in murder rate since the abolition of CP,AGAINST,,,12
 the recent survey shows that 60% British people support CP,FOR,1,1,14
-statistics shows that repeat offences of murders are extremely low,AGAINST,1,5,13
+statistics shows that repeat offences of murders are low,AGAINST,1,5,13
 statistics shows that repeat offences of murders are extremely low,AGAINST,2,2,14
-murderers should be given chance for rehabilation,AGAINST,0,5,15
+murderers should be given chance for rehab,AGAINST,0,5,15
 murderers should be given chance for rehabilation,AGAINST,2,2,16

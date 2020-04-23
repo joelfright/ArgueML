@@ -8,6 +8,7 @@ import KBUnit.knowledgeBase;
 import MLUnit.qLearning;
 import PlanningUnit.planning;
 import PlanningUnit.reward;
+import ResultsUnit.results;
 
 public class base {
 
@@ -22,6 +23,7 @@ public class base {
     public planning pl = new planning();
     public reward rw = new reward();
     public qLearning ql = new qLearning();
+    public results rl = new results();
 
     private base(){
         ag = agent.A;

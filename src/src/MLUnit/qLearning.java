@@ -22,6 +22,9 @@ public class qLearning {
     }
 
     private double findMax(double[][][] QTable, int state, int action){
+        if(state != 0){
+            state = state - 1;
+        }
         double maximum = QTable[state][action][0];
         for (int i = 1 ; i < QTable[0][0].length; i++) {
             if (QTable[state][action][i] > maximum) {
@@ -47,6 +50,21 @@ public class qLearning {
                 System.out.println("]");
 
         }
+    }
+
+    public double averageReward(int player){
+        double avgReward = 0;
+        double[][][] QTable;
+        if(player == 0) QTable = QTableFor;
+        else QTable = QTableAg;
+        for (double[][] doubles : QTable) {
+            for (int j = 0; j < QTable[0].length; j++) {
+                for(int k = 0; k < QTable[0][0].length; k++){
+                    avgReward = avgReward + doubles[j][k];
+                }
+            }
+        }
+        return avgReward;
     }
 
 }
