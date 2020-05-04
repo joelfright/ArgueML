@@ -34,22 +34,23 @@ public class qLearning {
         return maximum;
     }
 
-    public void printQTable(int player){
+    public String printQTable(int player){
+        StringBuilder QTableOutput = new StringBuilder();
         double[][][] QTable;
         if(player == 0) QTable = QTableFor;
         else QTable = QTableAg;
         for (double[][] doubles : QTable) {
-                System.out.print("[");
+            QTableOutput.append("[");
                 for (int j = 0; j < QTable[0].length; j++) {
-                    System.out.print("[");
+                    QTableOutput.append("[");
                     for(int k = 0; k < QTable[0][0].length; k++){
-                        System.out.print(" " + df.format(doubles[j][k]) + " ");
+                        QTableOutput.append(" ").append(df.format(doubles[j][k])).append(" ");
                     }
-                    System.out.print("]");
+                    QTableOutput.append("]");
                 }
-                System.out.println("]");
-
+            QTableOutput.append("]").append("\n");
         }
+        return QTableOutput.toString();
     }
 
     public double averageReward(int player){

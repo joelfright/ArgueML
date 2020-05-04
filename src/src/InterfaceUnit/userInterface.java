@@ -9,6 +9,7 @@ import java.awt.event.ItemEvent;
 public class userInterface {
 
     private JTextArea chatbox = new JTextArea();
+    private JTextArea qTable = new JTextArea();
     private JTextField numSim = new JTextField();
     private JTree treeFull;
 
@@ -31,6 +32,7 @@ public class userInterface {
         mainPanel.add(simulatePanel());
         mainPanel.add(resetPanel());
         mainPanel.add(expandPanel());
+        mainPanel.add(qTablePanel());
         mainWindow.pack();
 
         mainWindow.setLocationRelativeTo(null);
@@ -119,6 +121,18 @@ public class userInterface {
         return treeScrollPane;
     }
 
+    private JPanel qTablePanel(){
+        chatbox.setEditable(false);
+
+        JPanel qTablePane = new JPanel();
+        qTablePane.add(qTable);
+        qTablePane.setPreferredSize(new Dimension(475, 152));
+        qTablePane.setBackground(Color.white);
+        qTablePane.setBorder(BorderFactory.createLineBorder(Color.black));
+
+        return qTablePane;
+    }
+
     private void createTree(){
         treeFull = new JTree(base.instance.pl.fullTree);
     }
@@ -162,7 +176,11 @@ public class userInterface {
     }
 
     private int getWindowHeight(){
-        return 520;
+        return 645;
+    }
+
+    public void setQTable(String text){
+        qTable.setText(text);
     }
 
     public void setChatbox(String text){

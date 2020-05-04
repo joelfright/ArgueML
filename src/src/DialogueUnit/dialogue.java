@@ -41,10 +41,7 @@ public class dialogue {
             TreeNode branch = currentTree.getChildAt(index);
             argument(branch);
         }while(!(used[0][0] && used[1][0] && used[2][0] && used[0][1] && used[1][1] && used[2][1]));
-        System.out.println("A: ");
-        base.instance.ql.printQTable(0);
-        System.out.println("B: ");
-        base.instance.ql.printQTable(1);
+        base.instance.UI.setQTable("A: " + "\n" + base.instance.ql.printQTable(0) + "B:"+ "\n" + base.instance.ql.printQTable(1));
     }
 
     public TreeNode getCurrentBranch(){
